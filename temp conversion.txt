@@ -1,0 +1,113 @@
+1. Go to File -&gt; New Project. Select Java Web in categories and Web Application
+in Projects. Click on Next to create web based project.
+
+2. Enter a project name whatever you want and then click on Next. On next page
+click Finish.
+
+3. After completion of project creation process a window will appear like below.
+
+4. Create web service.
+Right click on Project -&gt; New -&gt; Web Service
+
+5. Enter a Web Service Name and package name and then click on Finish to
+create a Web Service.
+
+6. As you can see in following pic; In Source Packages there is a package Service
+which contains the service file temp_service.java. Open this file by double
+click on it, So that we can add two operation that will convert temperature
+from celcious to farhenheit and vice-versa.
+Go to design mode by click on Design .
+
+7. Click on Add Operation to add operation.
+
+8. Give Operation name F_to_C and return type as Double. So this method will
+return value in Double data type. After that click on Add button to give
+parameters for method. Give its name as f and type as Double and then click
+on OK button. Your one operation is now successfully created.
+
+9. Repeat step 7 &amp; 8 to create second operation. But this time replace some
+above entered data with following data.
+F_to_C -&gt; C_to_F
+f -&gt; c
+10. Now go to source mode by click on Source and delete the selected segment
+of code. Because it is default operation and we don’t need this.
+
+11. Now replace the selected area with following code to convert Fahrenheit to
+Celsius.
+Double c = (f-32)*1.8;
+return c;
+
+12. Now replace the selected area with following code to convert Celsius to
+Fahrenheit and then press Ctrl+S to save.
+Double f = (c*1.8)+32;
+return f;
+
+13. Now right click on project name and click on Deploy to deploy your project.
+
+14. To test your web service follow the following process as in picture.
+
+15. Following window will open in in browser. Now if you will enter a numeric
+data into first box and you will click on first button it will convert the entered
+data into Celsius.
+
+16. Selected value is in celsius of 56.
+
+17. Similarly second textbox and button will convert the numeric value into
+Fahrenheit. Now to consume this web service we are creating a client.
+18. Now create a new web application project with name as Temp_client.
+
+19. Now open the index.html page of Temp_client and write the following
+code into that.
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Temperature converter&lt;/title&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-
+scale=1.0&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form&gt;
+&lt;br&gt;&lt;input type=&quot;text&quot; name=&quot;data&quot;&gt;&lt;br&gt;
+&lt;br&gt;&lt;input type=&quot;submit&quot; value=&quot;Convert F to C&quot; name=&quot;ftoc&quot;
+formaction=&quot;f_to_c.jsp&quot;&gt;&lt;br&gt;
+&lt;br&gt;&lt;input type=&quot;submit&quot; value=&quot;Convert C to F&quot; name=&quot;ctof&quot;
+formaction=&quot;c_to_f.jsp&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+20. Now create two jsp pages for both submit button.
+Right click on Web Pages -&gt; New -&gt; JSP
+
+21. Enter file name f_to_c and then click on Finish.
+
+22. Now repeat the step number 20 &amp; 21. But give the File Name as c_to_f.
+23. Now you have created two jsp files.
+
+24. Right click on Temp_client and select Web Service Client as below.
+
+25. Click on Browse.
+
+26. New window will appear and then select temp_service and click on OK.
+
+27. Click on Finish.
+
+28. Now open the c_to_f.jsp file and delete the selected line.
+
+29. Now right click in between the body section and select Call Web Service
+Operatin as below.
+
+30. New window will appear select the C_to_F by expanding it and click on OK.
+So that selected code in second pic will be automatically generated.
+
+31. Now, make the selected area in step 30 as like selected area in below pic
+by adding some line of code.
+
+32. Now Open the f_to_c.jsp file and follow the steps from 28 to 31. Only the
+change is in 30 number step and i.e. instead of C_to_F, you have to select
+F_to_C.
+33. Now run the Temp_client project. An window will be open like below.
+
+34. Now you can to enter any numeric data into textbox and if you will click the
+first button it will convert the numeric value into Celsius and vice-versa for
+the second button.

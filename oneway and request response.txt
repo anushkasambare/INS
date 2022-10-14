@@ -1,0 +1,245 @@
+AIM: Write a program to implement the operation can receive request and will return a response in two ways. a) One - Way operation b) Request –Response.
+
+
+1) Click on Window menu and click on Projects, Files & Services to open it.
+
+2) Right click on Java DB and then click on Start Server to start the server .      
+
+3) Now expand Java DB and right click on sample and then click on connect to connect the sample database with server.
+
+4) Now we are going to create a table in default database sample.
+
+Right click on Table -> Create Table
+
+5) Give table name as FRIENDS.
+
+6) Now click on Add column button to add columns in table.
+
+Enter details as in below pic and select Primary key. After that click on OK button.
+7) Now add second column with following detail. But don’t select primary and click on OK button.
+8) Now click on OK button.
+9) Now you can see a table with name FRIENDS in the table.
+10) Right click on FRIENDS to view and add records into it.
+Now click on the leftmost icon in second panel to insert some record.
+
+
+ Insert a record and then click on Add Row button to insert more record. After that click on OK button to finish.
+
+As you can see, I have entered 7 records.
+
+
+ Create a Web Application with name Service.
+
+ Creating a web service.
+Right click on Service web application -> New -> Other
+
+
+ In Categories select Web Services. 
+
+ In File Types select Web Service and then click on Next button.
+
+
+ In Web Service Name and Package, enter myws and com.kk respectively. After that click on Finish button.
+
+ Creating connection for database.
+Right click on Service web application -> New -> Other
+
+
+  In Categories select GlassFish and in File Types select JDBC Connection Pool. After that click on Next button.
+
+ Everything leave as it is and click on Next button.
+
+ Click on Next button.
+
+ Click on Finish button.
+
+ Right click on Service web application -> New -> Other
+
+
+ In categories select GlassFiss and in File Types select JDBC resource. Click Next
+
+ Select connectionPool and in JNDI Name enter jdbc/mydb. After that click on Finish.
+
+
+ Now open myws.java file by double click on it.
+
+ In myws.java right click at line number 18 and select Insert Code.
+
+ Select Data Source.
+
+
+
+  Click on Add button.
+
+ In Reference Name enter mydsn and then click OK in both panel.
+
+
+ Now go in Design mode.
+
+
+ Select hello window and then click on Remove Operation to remove this method. Because we don’t need this.
+
+ Now click on Add Operation.
+
+
+ Enter Name as getName and click on Add to add a parameter.
+
+ Give Name as id and Type as int. After that click on OK.
+
+ Now add one more operation by follow step number 34, 35. But this time give Name as insertName and Return Type void. Add two parameters by click two times on Add button and change the Name and Type as below. After that click on OK button.
+
+ As you can see, two operations are created with name getName and insertName.
+
+
+ Now go into the Source mode of myws.java and add the selected statement to import everything from sql.
+
+
+
+ Now replace the contents of getName method with following code.
+
+try{
+            Connection c=mydsn.getConnection();
+            PreparedStatement ps=c.prepareStatement("select * from friends where id=?");
+            ps.setInt(1, id);
+            ResultSet r=ps.executeQuery();
+            if(r.next())
+                return r.getString(2);
+            else
+                return "No name found";
+
+            }catch(Exception e)
+                {return "error";}
+
+
+
+  Now replace the contents of insertName method with following code and after that press Ctrl+S to save the changes.
+
+try{
+            Connection c=mydsn.getConnection();
+            PreparedStatement ps=c.prepareStatement("insert into friends(id,firstname) values(?,?)");
+            ps.setInt(1, id);
+            ps.setString(2, name);
+            ps.executeUpdate();
+           
+            }catch(Exception e){}
+
+
+
+ Now deploy the Service web application by right click on it.
+
+
+ Now create another Web Application named ServiceClient to consume these two web services. Click on Next and then Finish.
+
+ Adding a JSP page.
+Right click on ServiceClient -> New -> Other
+
+ In Categories select Web and in File Types select JSP. After that click on Next.
+
+ Give name it as getData and then click on Finish.
+
+ Follow the step number 44, 45 & 46 to create one more JSP page. But this time file name will be insertData.
+
+  Now Open index.html page of ServiceClient by double click on it.
+
+
+
+ Now replace the contents of BODY tag with following code in index.html file.
+
+<form>
+            <h2>One-way Operation</h2><br>
+            <input type="text" name="txt1" placeholder="Enter ID"><br><br>
+            <input type="text" name="txt2" placeholder="Enter Firstname"><br><br>
+            <input type="submit" formaction="insertData.jsp" value="Insert Record"><br>
+
+            <h1>--------------------------------------------</h1>
+
+            <h2>Request-Response operation</h2><br>
+            <input type="text" name="txt3" placeholder="Enter ID"><br><br>
+            <input type="submit" formaction="getData.jsp" value="Get Firstname"><br><br>
+        </form>
+
+
+ Now right click on ServiceClient -> New -> Other.
+
+ Select Web Services in Categories and Web Service Client in File Types. After that click on Next.
+
+ Click on Browse button.
+
+ Expand Service and select myws. After that click on OK.
+
+
+
+ Enter Package as com.kk and click on Finish.
+
+
+
+
+
+
+ Now open getData.jsp file by double click on it.
+
+
+
+ Delete the selected part of BODY tag.
+
+
+
+  Right click in between BODY tag and select Call Web Service Operation as in below screenshot.
+
+
+ Select getName by expanding and then click on OK.
+
+
+ Selected code between BODY tag will be automatically generated.
+
+
+ Now add the following additional line and make it as below screenshot. After that press Ctrl+S to save the changes.
+int fid = Integer.parseInt(request.getParameter("txt3"));
+
+int id = fid;
+
+out.println("Firstname = "+result);
+
+
+
+  Now open the insertData.jsp file and follow the steps from 56 to 58. Only the change is in 58, you have to select insertName instead of getName.
+Following selected code will be automatically generated.
+
+
+
+
+
+ Insert the following codes and make it as in below screenshot. After that press Ctrl+S to save the changes.
+
+int fid = Integer.parseInt(request.getParameter("txt1"));
+String fname = request.getParameter("txt2");
+
+int id = fid;
+java.lang.String name = fname;
+
+
+ Now Run the ServiceClient web application by right click on it.
+
+
+
+ A window will open in browser like below.
+
+
+ Now enter an ID in third textbox which you have inserted in your database table and click on Get Firstname button. It will give you the first name of particular entered ID.
+
+
+
+
+
+ Now you can do One-way Operation also, by entering ID and Firstname and then click on Insert Record button. It will insert the data in table. But make sure you are not entering the ID which is already in created table.
+
+
+
+ IA new page will appear. But this page will be blank. Because we are doing One-way Operation, consequently we will not get any response.
+
+
+ Now you can check the table record to ensure that operation is successfully done.
+As you can see that in step no 13 that, there was no record of DEVENDRA with ID in FRIENDS table. But in below FRIENDS table, record of DEVENDRA is showing.
+
+
+

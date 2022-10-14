@@ -1,0 +1,159 @@
+Aim: Implement a typical service and a typical client using WCF.
+Requirements:
+Visual Studio 2008 Professional.
+Note: For practical 8, 9 & 10 Visual Studio is mandatory. Because we can
+implement WCF Service only on Visual Studio.
+
+1. Open Visual Studio and open Project.
+
+2. In Project Types, select Web and in Templates select WCF Service
+Application. Give it name as MyService and click on OK button.
+
+3. Delete the selected two files from Solution Explorer placed on right hand side.
+Actually we are going to delete these files, because this is default WCF Service
+file and we want to create our own WCF Web Service.
+
+4. Now to create our own WCF web service.
+Right click on MyService -> Add -> New Item
+
+5. Select WCF Service in Templates. Give it name as arithmeticOperation and
+click on Add button.
+
+6. Now open the both selected files by clicking on both one by one alternatively.
+
+7. Now open IarithmeticOperation.cs file. It will look like below.
+
+8. Now replace the void DoWork() interface by following two new interfaces.
+After that press Ctrl+S to save the changes.
+
+double Sum(double a, double b);
+double Multi(double a, double b);
+
+You can add as many more interfaces as many WCF service methods you
+want. After that you will use these interfaces in arithmeticOperation.svc.cs
+file to define the Service methods. In this WCF service I’m creating only two
+methods that can be used by client.
+9. Now open arithmeticOperation.svc.cs page. It will look like below.
+
+10. As we can see it contains the DoWork() method already, that interface we
+have deleted in previous file and we replaced this by two new interfaces. So
+we will use those two interfaces as method in this file. After add following
+code press Ctrl+S to save the changes.
+public double Sum(double a, double b)
+{
+double result = a + b;
+return result;
+}
+public double Multi(double a, double b)
+{
+double result = a * b;
+return result;
+}
+
+11. Now right click on arithmeticOperation.svc file name in Solution Explorer and
+click on Set As Start Page.
+
+12. Now right click on MyService in Solution Explorer and select Build to build the
+project.
+
+13. Now click on run button to run the project.
+
+14. If any window appears like below then select Run without debugging and
+click on OK button.
+
+15. A new window will open in browser like below.
+
+16. So we have successfully created a WCF Service and it is running on inbuilt
+server of visual studio. You can see it in taskbar.
+
+17. Now copy the selected link to consume this service on client side.
+
+18. Now take care, you can close the browser. But don’t close the Solution
+Explorer or Visual Studio, otherwise inbuilt server will stop and you will get
+error during consuming this service. Even, you have to create the client within
+the same Solution Explorer. To solve this problem we can host this service on
+IIS. But it will take more steps and for our practical we don’t need this.
+19.Now right click on solution explorer and add a new project to create client.
+
+20. In Project Type select Web and in Templates select ASP.Net Web
+Application. Give it name as ServiceClient and then click on OK button.
+
+21.Right click on Service ServiceClient in Solution Explorer and select Add Service
+Reference.
+
+22. Paste the copied link into Address and click on Go button.
+
+23. As you can see arithmeticOperation Service is fetched. Now I’m leaving
+Namespace as it is i.e. ServiceRefference1. Actually this namespace will be
+used to call the Service methods. If you will change it then you have to use the
+according namespace to call the service methods. Click on OK button.
+
+24. As you can see Service Refference is added with Namespace in Solution
+Explorer.
+
+25. Default.aspx page of ServiceClient will appear by default in Source mode.
+Otherwise you can open it from solution explorer.
+
+26. Now go to design mode by click on Design.
+
+27. Now click on Toolbox on the top-left in above pic to add components. To add
+a textbox select TextBox from Toolbox and drag it into the screen that is
+appearing as blank.
+
+28. As you can see a TextBox is added to page. Right click on it and select
+Properties to set it’s ID.
+
+29. Property list of selected TextBox will open and you can see its ID is TextBox1.
+I’m going to leave it as it is. So its ID is TextBox1. You can change its ID, But
+accordingly it will change in C# program, where we will fetch the values of
+textboxes using its ID.
+
+30. Now click after textbox and press two times enter button to create vertical
+space between two textboxes.
+
+31. Repeat step number 27 & 30 to create two more textboxes. Default ID for
+these two textboxes will be TextBox2 and TextBox3 respectively. It will look
+like below.
+
+32. Now adding one button by follow below steps.
+Click on Toolbox, select button and drag it into the blank screen.
+
+33. Right click on button and select Properties to give its ID and text.
+
+So in this way I have given ID as btn and Text as Add Numbers.
+
+Now I’m going to create an even that will trigger by click on this button. It will
+get the data from first two TextBoxes and Using WCF service it will add those
+two numbers. Result of the service will displayed in third textbox.
+As we have created two methods in WCF service. You can add one more
+button to call the second service method. But I’m going to use only one service
+method.
+34. Now to add event on button click, double click on button. It will automatically
+navigate you to the block where you can add your codes for event.
+
+35. Now add the following code into this block and press Ctrl+S to save the
+changes.
+
+ServiceReference1.IarithmeticOperationClient ob= new
+ServiceReference1.IarithmeticOperationClient();
+double num1 = double.Parse(TextBox1.Text);
+double num2 = double.Parse(TextBox2.Text);
+TextBox3.Text = Convert.ToString(ob.Sum(num1, num2));
+
+36. Now right click on Default.aspx in ServiceClient set it as start page.
+
+37. Right click on ServiceClient and build the project.
+
+38. Again right click on ServiceClient and set it as StartUp project.
+
+39. Now click on Run button or press F5 to run this project.
+
+40. Select run without debugging and click OK button.
+
+41. A window will open in browser like below.
+
+42. Now enter two numbers in first two boxes and click on Add Numbers button.
+Then addition of above two numbers will displayed into third textbox.
+
+You can create one more button for multiplication event that we have created in
+WCF service.

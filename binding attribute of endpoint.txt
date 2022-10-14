@@ -1,0 +1,111 @@
+Aim: Demonstrate using the binding attribute of an endpoint element in WCF
+(Program for WCF TCP-Binding)
+
+1)create WCF Service
+2)Open Microsoft visual studio---go to file---new---project----select WCF(on left side)----select WCF Service Library  (on right side)---give name as SampleCalcSvc
+3)Delete IService1.cs and Service.svc from right side(from solution explorer)
+4)Go to app.config (from solution explorer)and delete the selected code
+<!--- till before <configuration>
+
+After delete this code will b displayed
+
+5)right click on SampleCalcSvc (from solution explorer)-----add---new item---interface ----give name ICalcService.cs
+
+6)write code in ICalcService.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ServiceModel;
+
+namespace SampleCalcSvc
+{
+    [ServiceContract]
+   public interface ICalcService
+    {
+        [OperationContract]
+        int GetSum(int a, int b);
+    }
+}
+
+7)right click on SampleCalcSvc (from solution explorer)--- ---add---new item---class ----give name CalcService.cs
+
+8) write code ICalcService.cs
+using System.Text;
+
+namespace SampleCalcSvc
+{
+    public class CalcService : ICalcService
+    {
+        public int GetSum(int a, int b)
+        {
+            return a + b;
+        }
+    }
+}
+9)right click on SampleCalcSvc (from solution explorer)------build
+10) right click on App.config(from solution explorer)------EditWcfConfiguration
+11)select create new service and select 
+ Browse ---bin-----debug----- SampleCalcSvc.dll--- SampleCalcSvc. CalcService
+
+Click next ---SELECT TCP----
+
+empty the text box----click yes 
+
+
+
+Click next 
+
+Finish
+
+
+Give name as SampleCalcSvcNetTcpEndpoint
+
+
+
+
+
+
+
+
+
+Address –mex
+Binding –mexTcpBinding
+Contract –Select IMetadataExchange from list 
+12) select host------new button ----enter base address 
+net.tcp://localhost:8080/SampleSvc---------ok
+
+
+
+
+
+Click host---new button ---give base address 
+
+
+
+
+Click advanced ---right click service behavior –new service behavior configuration 
+
+
+
+Click add button 
+
+
+Select and Click add
+
+Select and Click add
+
+
+Select service debug
+
+
+
+
+
+File --save
+
+
+Save the project 
+
+20)save project and run (debug)
+21) click sum----give value 

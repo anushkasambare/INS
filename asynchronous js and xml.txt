@@ -1,0 +1,84 @@
+Use WCF to create a basic ASP.NET Asynchronous JavaScript and XML(AJAX) service
+ 
+Step 1 : Open Visual Studio 2010.
+Go to File->New->WebSite
+Select ASP.NET Empty WebSite
+Step 2 : Go to Solution Explorer and right-click.
+Select Add->New Item
+Select WebForm
+Default.aspx page will open
+
+ 
+Define WCF Service :
+Step 3 : Go to Solution Explorer and right-click.
+Select Add->New Item
+Select AJAX Enabled WCF Service and give name as GreetingService.
+Open GreetingService.cs and define the function Greeting as shown below 
+
+
+
+
+Step 4 : Open Default.aspx page and click in [Design option].
+
+From  Toolbox, Drag and drop 1)Scriptmanager Control 2)Button
+ 
+
+Set value property of button as greet from properties window 
+ 
+Step 5 : In [Design] page right-click on Scriptmanager Control
+Select Properties option
+select Services 
+
+
+
+Step 6: 
+set path
+write GreetingService (which is the name of ajax enabled web services )
+
+
+
+
+Step 7:
+Open Default.aspx page and click in [Source option].
+ 
+
+Step 8:
+
+Write code (write the bold black text  )
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+    <asp:ScriptManager ID="sm1" runat="server">
+    <Services>
+    <asp:ServiceReference Path="~/GreetingService.svc" />
+    </Services>
+    </asp:ScriptManager>
+    <input type="button" value="greet" onclick="showgreeting()" />
+    </div>
+    </form>
+</body>
+</html>
+
+
+<script language="javascript" type="text/javascript">
+
+    function showgreeting() 
+    {
+
+        GreetingService.Greeting(onSuccess);
+
+    }
+
+    function onSuccess(response) 
+    {
+        alert(response);
+    }
+
+</script>
+
+Step 9:  run by right click on default.aspx in solution explorer ---select view in browser 

@@ -1,0 +1,92 @@
+Aim: Write a JAX-WS web service to perform the following operations. Define a Servlet / JSP that consumes the web service.
+
+
+Step 1 select java web application
+Open Netbeans 8/8.2  --- file --- new project --- java web (left) --- web application(right)
+Give name – calcwebservice
+Step 2 select web service 
+Right click on project name calcwebservice –new –other –web service 
+
+
+Step 3 
+Go to Design page ---- add operation
+
+
+calservice.java
+
+package mypack;
+import javax.jws.WebService;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+
+@WebService(serviceName = "calcservice")
+public class calcservice {
+
+ @WebMethod(operationName = "hello")
+    public String hello(@WebParam(name = "name") String txt) {
+        return "Hello " + txt + " !";
+    }
+    
+@WebMethod(operationName = "Addition")
+    public Integer Addition(@WebParam(name = "a") int a, @WebParam(name = "b") int b) {
+        //TODO write your implementation code here:
+        return a+b;
+    }
+
+    
+    @WebMethod(operationName = "Subtract")
+    public Integer Subtract(@WebParam(name = "a") int a, @WebParam(name = "b") int b) {
+        //TODO write your implementation code here:
+        return a-b;
+    }
+}
+
+Step 4 run
+Right click on project name calcwebservice--- deploy
+Right click on calservice---test web service 
+
+
+
+
+
+Copy the URL as shown below
+http://localhost:8080/calcserviceproject/CalcWebService?WSDL
+
+
+Steps to create Servlet/Jsp
+
+Go to file – new—project
+Give name as calcclient
+Right click on calcclient –new --- web service client and paste the URL copied above
+
+Right click on calcclient –new ---jsp
+Give name as index
+Place your cursor below hello world or line 16 as shown in figure below
+
+
+Now right click below hello world 
+
+
+Click addition
+Write code in index.html
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+   <form action="index.jsp">
+       Enter n1 <input type="text" name="n1">
+       Enter n2<input type="text" name="n2">
+       <input type="submit" value="submit">
+   </form>
+    </body>
+</html>
+Write code in index.jsp
+
+Repeat the same steps for subtract place cursor below hello world and select subtract then add code in index .jsp
+
+
+Right click on calcclient project---deploy
+Run index,html
